@@ -1,0 +1,45 @@
+{% extends "base.html"%}
+{% block title %}Delete Team{% endblock %}
+{% block head%}
+{{super()}}
+  <style>
+    body {
+      padding: 75px;
+    }
+    img {
+      height: 100;
+      width: 100;
+      border-radius:180px;
+    }
+  </style>
+{% endblock %}
+{% block content%}
+
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete Team:</h1>
+    <form action="/team/delete/{{team.id}}" method="post">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" value="{{team.name}}" required="true" readonly="true">
+      </div>
+      <div class="form-group">
+        <label>Location</label>
+        <textarea class="form-control" name="about" required="true" readonly="true">{{team.location}}</textarea>
+      </div>
+      <button type="submit" class="btn btn-danger" id="delete_btn">Delete</button>
+    </form>
+  </div>
+
+{% endblock%}
+{% block scripts%}
+  {{super()}}
+  <script>
+  $(document).ready(function () {
+    $('#delete_btn').click(function () {
+      if (! confirm('Are you sure? All team information will be deleted too.')) {
+        return false;
+      }
+    })
+  });
+  </script>
+{% endblock%}

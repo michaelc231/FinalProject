@@ -1,0 +1,33 @@
+{% extends "base.html"%}
+{% block title %}Edit Team{% endblock %}
+{% block head%}
+{{super()}}
+  <style>
+    body {
+      padding: 75px;
+    }
+    img {
+      height: 100;
+      width: 100;
+      border-radius:180px;
+    }
+  </style>
+{% endblock %}
+{% block content%}
+
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Team:</h1>
+    <form action="/team/edit/{{team.id}}" method="post">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" value="{{team.name}}" required="true">
+      </div>
+      <div class="form-group">
+        <label>Location</label>
+        <textarea class="form-control" name="location" required="true" >{{team.location}}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+  </div>
+
+{% endblock%}

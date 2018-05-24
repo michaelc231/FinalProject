@@ -1,0 +1,97 @@
+{% extends "base.html"%}
+{% block title %}All Teams{% endblock %}
+{% block head%}
+{{super()}}
+
+{% endblock %}
+{% block content%}
+
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-sitemap" aria-hidden="true"></i> NFC East Teams:</h1>
+    <div class="row bottom-margin">
+      <a href="/team/add" class="btn btn-primary" role="button" aria-disabled="true">Add Teams</a>
+    </div>
+    {% if teams %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for team in teams %}
+          <tr>
+              <th scope="row">{{team.id}}</th>
+              <td>{{team.name}}</td>
+              <td>{{team.location}}</td>
+              <td>
+                <a href="/team/edit/{{team.id}}" class="btn btn-success" role="button">Edit</a>
+                <a href="/team/delete/{{team.id}}" class="btn btn-danger" role="button">Delete</a>
+                <button class="btn btn-warning delete_ajax_btn" role="button" data-artist-id="{{team.id}}">Delete Ajax</a>
+              </td>
+          </tr>
+          {% endfor%}
+        </tbody>
+      </table>
+    {% else %}
+      <h3>there is no artists in the database yet.</h3>
+    {% endif %}
+  </div>
+
+{% endblock%}
+
+{% block scripts%}
+{{super()}}
+<script>
+  $(document).ready(function() {
+    $(".delete_ajax_btn").click(function(event) {
+      var group_id = $(this).data("group-id");
+      // get the table row of this song
+      var row = $(this).parent().parent();
+      swal({
+          title: "Are you sure?",
+          text: "All breeds of this group will be deleted too!",
+          type: "warning",
+          html: true,
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, delete it!",
+          closeOnConfirm: false,
+          showLoaderOnConfirm: true
+        },
+        function(isConfirm) {
+          if (isConfirm) {
+            $.ajax({
+                type: "DELETE",
+                url: "/api/group/" + group_id,
+                success: function(response) {
+                  console.log(response);
+                  row.remove(); // remove the table row
+                  swal({
+                    title: "Deleted!",
+                    text: response.name + " has been deleted.",
+                    type: "success",
+                    timer: 2500,
+                    showConfirmButton: false
+                  }); // end of SweetAlert
+                } // end of success callback function
+              }) // end of ajax call
+              .fail(function(error) {
+                // console.log(data);
+                swal({
+                  title: "Oops...",
+                  text: "Deletion failed",
+                  type: "error",
+                  timer: 2000,
+                  showConfirmButton: false
+                }); // end of SweetAlert
+              }); // end of fail callback function
+          } // end of if confirmed block
+        }); // end of confirmed function of SweetAlert
+    }); // end of button click event function
+  }); // end doc ready
+</script>
+{% endblock%}

@@ -1,0 +1,57 @@
+{% extends "base.html"%}
+{% block title %}Delete Player{% endblock %}
+{% block head%}
+{{super()}}
+  <style>
+    body {
+      padding: 75px;
+    }
+    img {
+      height: 100;
+      width: 100;
+      border-radius:180px;
+    }
+  </style>
+{% endblock %}
+{% block content%}
+
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete the following Player:</h1>
+    <form action="/breed/delete/{{breed.id}}" method="post">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" value="{{players.name}}" required="true" readonly="true">
+      </div>
+      <div class="form-group">
+        <label>Height</label>
+        <textarea class="form-control" name="height" required="true" readonly="true">{{players.height}}</textarea>
+      </div>
+      <div class="form-group">
+        <label>Weight</label>
+        <textarea class="form-control" name="weight" required="true" readonly="true">{{players.weight}}</textarea>
+      </div>
+      <div class="form-group">
+        <label>Position</label>
+        <textarea class="form-control" name="pos" required="true" readonly="true">{{players.pos}}</textarea>
+      </div>
+      <div class="form-group">
+        <label>Team</label>
+        <input class="form-control" type="text" name="artist" value="{{players.team.name}}" readonly="true">
+      </div>
+      <button type="submit" class="btn btn-danger" id="delete_btn">Delete</button>
+    </form>
+  </div>
+
+{% endblock%}
+{% block scripts%}
+  {{super()}}
+  <script>
+  $(document).ready(function () {
+    $('#delete_btn').click(function () {
+      if (! confirm('Are you sure?')) {
+        return false;
+      }
+    })
+  });
+  </script>
+{% endblock%}
