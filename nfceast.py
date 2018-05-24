@@ -149,24 +149,24 @@ def edit_player(id):
         return redirect(url_for('show_all_teams'))
 
 
-@app.route('/breed/delete/<int:id>', methods=['GET', 'POST'])
-def delete_breed(id):
-    breed = Breed.query.filter_by(id=id).first()
-    group = Group.query.all()
+@app.route('/player/delete/<int:id>', methods=['GET', 'POST'])
+def delete_players(id):
+    player = PLayer.query.filter_by(id=id).first()
+    team = Team.query.all()
     if request.method == 'GET':
-        return render_template('breed-delete.html', breed=breed, group=group)
+        return render_template('player-delete.html', players=player, teams=team)
     if request.method == 'POST':
-        db.session.delete(breed)
+        db.session.delete(player)
         db.session.commit()
-        return redirect(url_for('show_all_breeds'))
+        return redirect(url_for('show_all_players'))
 
 
-@app.route('/ajax/breed/<int:id>', methods=['DELETE'])
-def delete_ajax_breed(id):
-    breed = Breed.query.get_or_404(id)
-    db.session.delete(breed)
+@app.route('/ajax/player/<int:id>', methods=['DELETE'])
+def delete_ajax_player(id):
+    player = Player.query.get_or_404(id)
+    db.session.delete(player)
     db.session.commit()
-    return jsonify({"id": str(breed.id), "name": breed.name})
+    return jsonify({"id": str(player.id), "name": player.name})
 
 
 
