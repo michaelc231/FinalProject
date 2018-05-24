@@ -151,7 +151,7 @@ def edit_player(id):
 
 @app.route('/player/delete/<int:id>', methods=['GET', 'POST'])
 def delete_players(id):
-    player = PLayer.query.filter_by(id=id).first()
+    player = Player.query.filter_by(id=id).first()
     team = Team.query.all()
     if request.method == 'GET':
         return render_template('player-delete.html', players=player, teams=team)
