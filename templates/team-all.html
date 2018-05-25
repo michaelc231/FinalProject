@@ -7,7 +7,7 @@
 {% block content%}
 
   <div class="container">
-    <h1 class="mt-5"><i class="fa fa-sitemap" aria-hidden="true"></i> NFC East Teams:</h1>
+    <h1 class="mt-5"><i class="fas fa-football-ball"></i> NFC East Teams:</h1>
     <div class="row bottom-margin">
       <a href="/team/add" class="btn btn-primary" role="button" aria-disabled="true">Add Teams</a>
     </div>
@@ -37,7 +37,7 @@
         </tbody>
       </table>
     {% else %}
-      <h3>there is no artists in the database yet.</h3>
+      <h3>There are no teams in the database yet.</h3>
     {% endif %}
   </div>
 
@@ -48,17 +48,17 @@
 <script>
   $(document).ready(function() {
     $(".delete_ajax_btn").click(function(event) {
-      var group_id = $(this).data("group-id");
-      // get the table row of this song
+      var team_id = $(this).data("team-id");
+      // get the table row of this team
       var row = $(this).parent().parent();
       swal({
           title: "Are you sure?",
-          text: "All breeds of this group will be deleted too!",
+          text: "All players of this team will also deleted.",
           type: "warning",
           html: true,
           showCancelButton: true,
           confirmButtonColor: "#DD6B55",
-          confirmButtonText: "Yes, delete it!",
+          confirmButtonText: "Delete",
           closeOnConfirm: false,
           showLoaderOnConfirm: true
         },
@@ -66,7 +66,7 @@
           if (isConfirm) {
             $.ajax({
                 type: "DELETE",
-                url: "/api/group/" + group_id,
+                url: "/api/team/" + team_id,
                 success: function(response) {
                   console.log(response);
                   row.remove(); // remove the table row

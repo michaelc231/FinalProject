@@ -36,19 +36,10 @@
     </div>
     <div class="form-group">
       <label>Team Name</label>
-      <select class="form-control" name="team">
-            {% for team in teams %}
-              {% if team == players.team.name %}
-                <option selected="selected">{{team.name}}</option>
-              {% else %}
-                <option>{{team.name}}</option>
-              {% endif %}
-            {% endfor %}
-          </select>
+        <input class="form-control" type="text" name="team" value="{{player.team.name}}" required="true">
     </div>
-    <div class="form-group">
-      Team not in the list? <a href="/team/add" class="btn btn-primary" role="button" aria-disabled="true">Add Team</a>
-    </div>
+    
+
     <button type="submit" class="btn btn-primary">Save Changes</button>
   </form>
 </div>

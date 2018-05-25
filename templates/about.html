@@ -1,18 +1,60 @@
 {% extends "base.html" %}
 
 {% block title %} Users {% endblock %}
+{% block head %}
+{{super()}}
+<style >
+p {
+  font-family: 'Noto Serif', serif;
+}
+</style>
+
+{% endblock%}
 
 {% block content %}
 
     <div class="container">
-      <h1 class="mt-5">About Me</h1>
+      <h1 class="mt-5">About the Developer</h1>
       <section class = "about-section p-3 p-lg-5 d-flex d-column">
         <div class="my-auto">
-          <p class="mb-0">This app was developed by Michael Connelly.</p>
-          <p></p>
+          <p class="mb-0">
+            This app was developed by Michael Connelly, for my MISY350 Final Project.
+             I chose this topic because I have been a fan of the NFL for my whole life.
+             Specifically, I’m a New York Giants fan and that’s why I chose to do the teams
+              and players in the NFC East. </p>
+
         </div>
       </section>
+      <section class = "section p-3 p-lg-5 d-flex d-column">
+        <ul class="list-inline list-social-icons mb-0">
+        <li class="list-inline-item">
+          <a href="https://www.linkedin.com/in/michael-connelly-279286140/" data-toggle="tooltip" title="LinkedIn" target="_blank">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+        </li>
+        <li class="list-inline-item">
+          <a href="https://github.com/michaelc231" data-toggle="tooltip" title="GitHub" target="_blank">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x"></i>
+              <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+        </li>
+      </ul>
+
+
+      </section>
+
+      <img class = "about" src="{{ url_for('static', filename='img/profile.jpg') }}"
+       alt="Profile Picture" width="300">
+      <img class = "about" src="{{ url_for('static', filename='img/giants.png') }}"
+        alt="New York Giants Logo" width="300">
+
     </div>
-    <!-- <img src="{{ url_for('static', filename='img/ud.png') }}" alt=""> -->
+
+
 
 {% endblock %}

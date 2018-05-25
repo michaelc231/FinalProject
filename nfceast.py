@@ -119,9 +119,9 @@ def add_players():
         height = request.form['height']
         weight = request.form['weight']
         pos = request.form['pos']
-        team_id = request.form['team_id']
-        team = Team.query.filter_by(name=team_id).first()
-        player = Player(name=name, height=height, weight=weight, pos=pos, team=team)
+        team_name = request.form['team']
+        player_team = Team.query.filter_by(name=team_name).first()
+        player = Player(name=name, height=height, weight=weight, pos=pos, team=player_team)
 
         # insert the data into the database
         db.session.add(player)
@@ -132,9 +132,9 @@ def add_players():
 @app.route('/player/edit/<int:id>', methods=['GET', 'POST'])
 def edit_player(id):
     player = Player.query.filter_by(id=id).first()
-    team = Team.query.all()
+    teams = Team.query.all()
     if request.method == 'GET':
-        return render_template('player-edit.html', player=player, team=team)
+        return render_template('player-edit.html', player=player, team=teams)
     if request.method == 'POST':
         # update data based on the form data
         player.name = request.form['name']
@@ -142,11 +142,11 @@ def edit_player(id):
         player.weight = request.form['weight']
         player.pos = request.form['pos']
         team_name = request.form['team']
-        team = Team.query.filter_by(name=team_name).first()
-        team.name = teams
+        player_team = Team.query.filter_by(name=team_name).first()
+        player.team = player_team
         # update the database
         db.session.commit()
-        return redirect(url_for('show_all_teams'))
+        return redirect(url_for('show_all_players'))
 
 
 @app.route('/player/delete/<int:id>', methods=['GET', 'POST'])

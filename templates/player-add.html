@@ -32,16 +32,13 @@
       </div>
       <div class="form-group">
         <label>Team Name</label>
-        <select class="form-control" name="team">
-          {% for teams in teams %}
-              <option>{{team.name}}</option>
-          {% endfor %}
-        </select>
+        <input class="form-control" type="text" name="team" placeholder="Enter the player's Team:" required="true">
       </div>
       <div class="form-group">
-        Is this player's team not on this list? <a href="/team/add" class="btn btn-primary" role="button" aria-disabled="true">Add Team</a>
-      </div>
-      <button type="submit" class="btn btn-primary">Add players</button>
+      If this player's team is not in the database, add it here: <a href="/team/add" class="btn btn-primary" role="button" aria-disabled="true">Add Team</a>
+    </div>
+
+      <button type="submit" class="btn btn-primary">Add Player</button>
     </form>
   </div>
 

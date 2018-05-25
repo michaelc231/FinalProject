@@ -1,9 +1,15 @@
 h1 {
   text-align: center;
   font-style: normal;
-  color: red;
+  color: navy;
 
 }
 p {
   font-family: 'Noto Serif', serif;
+}
+
+img.about {
+
+  width: 50%;
+  float: left;
 }
