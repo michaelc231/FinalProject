@@ -30,7 +30,7 @@
               <td>
                 <a href="/team/edit/{{team.id}}" class="btn btn-success" role="button">Edit</a>
                 <a href="/team/delete/{{team.id}}" class="btn btn-danger" role="button">Delete</a>
-                <button class="btn btn-warning delete_ajax_btn" role="button" data-artist-id="{{team.id}}">Delete Ajax</a>
+                <button class="btn btn-warning delete_ajax_btn" role="button" data-team-id="{{team.id}}">Delete Ajax</a>
               </td>
           </tr>
           {% endfor%}
@@ -66,7 +66,7 @@
           if (isConfirm) {
             $.ajax({
                 type: "DELETE",
-                url: "/api/team/" + team_id,
+                url: "/ajax/team/" + team_id,
                 success: function(response) {
                   console.log(response);
                   row.remove(); // remove the table row
